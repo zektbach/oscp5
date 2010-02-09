@@ -1,7 +1,8 @@
 package netP5;
 
 public interface NetP5 {
-  String VERSION = "0.9.4";
+	
+  String VERSION = "0.9.5";
   
   boolean DEBUG = true;
   
