@@ -1,32 +1,32 @@
 /**
- * OscP5 is a processing and java library for the
- * open sound control protocol, OSC.
+ * An OSC (Open Sound Control) library for processing.
  *
- *  2006 by Andreas Schlegel
+ * ##copyright##
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA
- *
- * @author Andreas Schlegel (http://www.sojamo.de)
- *
+ * Boston, MA  02111-1307  USA
+ * 
+ * @author		##author##
+ * @modified	##date##
+ * @version		##version##
  */
 
 package oscP5;
 
 import java.net.DatagramPacket;
 import java.util.ArrayList;
-
 
 import netP5.AbstractMulticast;
 import netP5.AbstractTcpClient;
@@ -66,9 +66,9 @@ public class OscNetManager
 
   protected AbstractMulticast _myMulticast = null;
 
-  protected ArrayList _myUdpListener = new ArrayList();
+  protected ArrayList<UdpPacketListener> _myUdpListener = new ArrayList<UdpPacketListener>();
 
-  protected ArrayList _myTcpListener = new ArrayList();
+  protected ArrayList<TcpPacketListener> _myTcpListener = new ArrayList<TcpPacketListener>();
 
   public final static int NONE = 0;
 
@@ -367,14 +367,14 @@ public class OscNetManager
 
   public void process(final DatagramPacket thePacket, final int thePort) {
     for (int i = 0; i < _myUdpListener.size(); i++) {
-      ( (UdpPacketListener) _myUdpListener.get(i)).process(thePacket, thePort);
+      _myUdpListener.get(i).process(thePacket, thePort);
     }
   }
 
 
   public void process(final TcpPacket thePacket, final int thePort) {
     for (int i = 0; i < _myTcpListener.size(); i++) {
-      ( (TcpPacketListener) _myTcpListener.get(i)).process(thePacket, thePort);
+      _myTcpListener.get(i).process(thePacket, thePort);
     }
   }
 

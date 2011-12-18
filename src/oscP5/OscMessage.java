@@ -1,25 +1,26 @@
 /**
- * OscP5 is a processing and java library for the
- * open sound control protocol, OSC.
+ * An OSC (Open Sound Control) library for processing.
  *
- *  2006 by Andreas Schlegel
+ * ##copyright##
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *make
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA
- *
- * @author Andreas Schlegel (http://www.sojamo.de)
- *
+ * Boston, MA  02111-1307  USA
+ * 
+ * @author		##author##
+ * @modified	##date##
+ * @version		##version##
  */
 
 package oscP5;
@@ -182,16 +183,15 @@ public class OscMessage extends OscPacket {
         _myArguments = new Object[0];
     }
 
-    // ESCA-JAVA0108:
+    
     /**
-     * @todo
+     * TODO
      * set should enable the programmer to set values
      * of an existing osc message.
      */
     public void set(final int theIndex, final Object theObject) {
-    	byte[] myPreTypetag = new byte[theIndex];
-    	byte[] myPostTypetag = new byte[_myTypetag.length - theIndex];
-    	
+//    	byte[] myPreTypetag = new byte[theIndex];
+//    	byte[] myPostTypetag = new byte[_myTypetag.length - theIndex];
     	System.out.println("Typetag:\t" + _myTypetag.length);
     	System.out.println("Arguments:\t");
     	Bytes.printBytes(_myData);
@@ -202,7 +202,6 @@ public class OscMessage extends OscPacket {
     }
 
 
-//    public void
     /**
      *
      * @param theTypeTag
@@ -270,8 +269,8 @@ public class OscMessage extends OscPacket {
      * 
      * @param theArguments
      */
-    public void addArguments(final Object[] theArguments) {
-        add(theArguments);
+    public OscMessage addArguments(final Object[] theArguments) {
+        return add(theArguments);
     }
 
 
@@ -404,19 +403,21 @@ public class OscMessage extends OscPacket {
      * add documentation for specific information.
      * @example oscP5message
      */
-    public void add() {
+    public OscMessage add() {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x4e});
+        return this;
     }
 
 
     /**
      * @param theValue int
      */
-    public void add(final int theValue) {
+    public OscMessage add(final int theValue) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x69});
         _myData = Bytes.append(_myData, Bytes.toBytes(theValue));
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = new Integer(theValue);
+        return this;
     }
 
 
@@ -424,13 +425,14 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue String
      */
-    public void add(final String theValue) {
+    public OscMessage add(final String theValue) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x73});
         final byte[] myString = theValue.getBytes();
         _myData = Bytes.append(_myData, myString,
                                new byte[align(myString.length)]);
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = theValue;
+        return this;
     }
 
 
@@ -438,12 +440,13 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue float
      */
-    public void add(final float theValue) {
+    public OscMessage add(final float theValue) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x66});
         _myData = Bytes.append(_myData, Bytes.toBytes(Float
                 .floatToIntBits(theValue)));
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = new Float(theValue);
+        return this;
     }
 
 
@@ -451,12 +454,13 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue double
      */
-    public void add(final double theValue) {
+    public OscMessage add(final double theValue) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x64});
         _myData = Bytes.append(_myData, Bytes.toBytes(Double
                 .doubleToLongBits(theValue)));
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = new Double(theValue);
+        return this;
     }
 
 
@@ -464,12 +468,13 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue boolean
      */
-    public void add(final boolean theValue) {
+    public OscMessage add(final boolean theValue) {
         if (theValue) {
             _myTypetag = Bytes.append(_myTypetag, new byte[] {0x54});
         } else {
             _myTypetag = Bytes.append(_myTypetag, new byte[] {0x46});
         }
+        return this;
     }
 
 
@@ -477,8 +482,9 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue Boolean
      */
-    public void add(final Boolean theValue) {
+    public OscMessage add(final Boolean theValue) {
         add((theValue).booleanValue());
+        return this;
     }
 
 
@@ -486,8 +492,9 @@ public class OscMessage extends OscPacket {
      *
      * @param theValue Integer
      */
-    public void add(final Integer theValue) {
+    public OscMessage add(final Integer theValue) {
         add(theValue.intValue());
+        return this;
     }
 
 
@@ -496,8 +503,9 @@ public class OscMessage extends OscPacket {
      * @param theValue
      * Float
      */
-    public void add(final Float theValue) {
+    public OscMessage add(final Float theValue) {
         add(theValue.floatValue());
+        return this;
     }
 
 
@@ -506,8 +514,9 @@ public class OscMessage extends OscPacket {
      * @param theValue
      * Double
      */
-    public void add(final Double theValue) {
+    public OscMessage add(final Double theValue) {
         add(theValue.doubleValue());
+        return this;
     }
 
 
@@ -516,8 +525,9 @@ public class OscMessage extends OscPacket {
      * @param theValue
      * Character
      */
-    public void add(final Character theValue) {
+    public OscMessage add(final Character theValue) {
         add(theValue.charValue());
+        return this;
     }
 
 
@@ -526,11 +536,12 @@ public class OscMessage extends OscPacket {
      * @param theValue
      * char
      */
-    public void add(final char theValue) {
+    public OscMessage add(final char theValue) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x63});
         _myData = Bytes.append(_myData, Bytes.toBytes(theValue));
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = new Character(theValue);
+        return this;
     }
 
 
@@ -542,7 +553,7 @@ public class OscMessage extends OscPacket {
      * @param value2 int
      */
 
-    public void add(final int channel,
+    public OscMessage add(final int channel,
                     final int status,
                     final int value1,
                     final int value2) {
@@ -555,6 +566,7 @@ public class OscMessage extends OscPacket {
         _myData = Bytes.append(_myData, theBytes);
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = theBytes;
+        return this;
     }
 
 
@@ -563,10 +575,11 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * int[]
      */
-    public void add(final int[] theArray) {
+    public OscMessage add(final int[] theArray) {
         for (int i = 0; i < theArray.length; i++) {
             add(theArray[i]);
         }
+        return this;
     }
 
 
@@ -575,10 +588,11 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * char[]
      */
-    public void add(final char[] theArray) {
+    public OscMessage add(final char[] theArray) {
         for (int i = 0; i < theArray.length; i++) {
             add(theArray[i]);
         }
+        return this;
     }
 
 
@@ -587,10 +601,11 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * float[]
      */
-    public void add(final float[] theArray) {
+    public OscMessage add(final float[] theArray) {
         for (int i = 0; i < theArray.length; i++) {
             add(theArray[i]);
         }
+        return this;
     }
 
 
@@ -599,10 +614,11 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * String[]
      */
-    public void add(final String[] theArray) {
+    public OscMessage add(final String[] theArray) {
         for (int i = 0; i < theArray.length; i++) {
             add(theArray[i]);
         }
+        return this;
     }
 
 
@@ -611,11 +627,12 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * byte[]
      */
-    public void add(final byte[] theArray) {
+    public OscMessage add(final byte[] theArray) {
         _myTypetag = Bytes.append(_myTypetag, new byte[] {0x62});
         _myData = Bytes.append(_myData, makeBlob(theArray));
         _myArguments = increase(1);
         _myArguments[_myArguments.length-1] = theArray;
+        return this;
     }
 
 
@@ -624,12 +641,13 @@ public class OscMessage extends OscPacket {
      * @param theArray
      * Object[]
      */
-    public void add(final Object[] theArray) {
+    public OscMessage add(final Object[] theArray) {
         for (int i = 0; i < theArray.length; i++) {
             if (!add(theArray[i])) {
                 System.out.println("type of Argument not defined in osc specs.");
             }
         }
+        return this;
     }
 
 
