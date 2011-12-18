@@ -1,25 +1,26 @@
 /**
- * OscP5 is a processing and java library for the
- * open sound control protocol, OSC.
+ * An OSC (Open Sound Control) library for processing.
  *
- *  2006 by Andreas Schlegel
+ * ##copyright##
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA
- *
- * @author Andreas Schlegel (http://www.sojamo.de)
- *
+ * Boston, MA  02111-1307  USA
+ * 
+ * @author		##author##
+ * @modified	##date##
+ * @version		##version##
  */
 
 package oscP5;
@@ -63,7 +64,7 @@ public class OscProperties {
 
   protected boolean isLocked = false;
 
-  protected final Vector listeners;
+  protected final Vector<OscEventListener> listeners;
 
   private NetAddress _myRemoteAddress = new NetAddress("", 0);
 
@@ -90,7 +91,7 @@ public class OscProperties {
    * create a new OscProperties Object.
    */
   public OscProperties() {
-    listeners = new Vector();
+    listeners = new Vector<OscEventListener>();
   }
 
 
@@ -100,8 +101,7 @@ public class OscProperties {
    * @return OscEventListener
    * @invisible
    */
-  public Vector listeners() {
-    // ESCA-JAVA0259:
+  public Vector<OscEventListener> listeners() {
     return listeners;
   }
 

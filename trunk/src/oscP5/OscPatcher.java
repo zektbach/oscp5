@@ -1,33 +1,32 @@
 /**
- * OscP5 is a processing and java library for the
- * open sound control protocol, OSC.
+ * An OSC (Open Sound Control) library for processing.
  *
- *  2006 by Andreas Schlegel
+ * ##copyright##
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA
- *
- * @author Andreas Schlegel (http://www.sojamo.de)
- *
+ * Boston, MA  02111-1307  USA
+ * 
+ * @author		##author##
+ * @modified	##date##
+ * @version		##version##
  */
 
 package oscP5;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Vector;
-
 import netP5.Bytes;
 import netP5.TcpClient;
 
@@ -46,7 +45,7 @@ protected static final byte ZEROBYTE = 0x00;
 
   protected static final long TIEMTAG_NOW = 1;
 
-  protected ArrayList messages;
+  protected ArrayList<OscMessage> messages;
 
   protected byte[] _myAddrPattern;
 
@@ -76,7 +75,7 @@ protected static final byte ZEROBYTE = 0x00;
     if (theBytes.length > OscBundle.BUNDLE_HEADER_SIZE) {
       timetag = (new Long(Bytes.toLong(Bytes.copy(theBytes, 8, 8)))).longValue();
       int myPosition = OscBundle.BUNDLE_HEADER_SIZE;
-      messages = new ArrayList();
+      messages = new ArrayList<OscMessage>();
       int myMessageLength = Bytes.toInt(Bytes.copy(theBytes, myPosition,4));
       while (myMessageLength != 0 && (myMessageLength % 4 == 0)
              && myPosition < theBytes.length) {
@@ -91,8 +90,8 @@ protected static final byte ZEROBYTE = 0x00;
       }
     }
     for (int i = 0; i < messages.size(); i++) {
-      if (!((OscMessage) messages.get(i)).isValid) {
-        messages.remove((OscMessage) messages.get(i));
+      if (!messages.get(i).isValid) {
+        messages.remove(messages.get(i));
       }
     }
 

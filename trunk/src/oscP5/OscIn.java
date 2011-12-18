@@ -1,96 +1,89 @@
 /**
- * OscP5 is a processing and java library for the
- * open sound control protocol, OSC.
+ * An OSC (Open Sound Control) library for processing.
  *
- *  2006 by Andreas Schlegel
+ * ##copyright##
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA
- *
- * @author Andreas Schlegel (http://www.sojamo.de)
- *
+ * Boston, MA  02111-1307  USA
+ * 
+ * @author		##author##
+ * @modified	##date##
+ * @version		##version##
  */
 
 package oscP5;
 
 import java.util.ArrayList;
 
-
 /**
- * OscIn is deprecated. for compatibility with previous versions
- * of oscP5 OscIn is still available.
+ * OscIn is deprecated. for compatibility with previous versions of oscP5 OscIn
+ * is still available.
+ * 
  * @invisible
  */
-public class OscIn
-    extends OscMessage {
+@Deprecated
+public class OscIn extends OscMessage {
 
-  public OscIn(OscMessage theOscMessage) {
-    super(theOscMessage);
-  }
+	public OscIn(OscMessage theOscMessage) {
+		super(theOscMessage);
+	}
 
+	public int getInt(int thePos) {
+		return get(thePos).intValue();
+	}
 
-  public int getInt(int thePos) {
-    return get(thePos).intValue();
-  }
+	public char getChar(int thePos) {
+		return get(thePos).charValue();
+	}
 
+	public float getFloat(int thePos) {
+		return get(thePos).floatValue();
+	}
 
-  public char getChar(int thePos) {
-    return get(thePos).charValue();
-  }
+	public String getString(int thePos) {
+		return get(thePos).stringValue();
+	}
 
+	public byte[] getBlob(int thePos) {
+		return get(thePos).bytesValue();
+	}
 
-  public float getFloat(int thePos) {
-    return get(thePos).floatValue();
-  }
+	public int[] getMidiBytes(int thePos) {
+		return get(thePos).midiValue();
+	}
 
+	public int[] getMidi(int thePos) {
+		return get(thePos).midiValue();
+	}
 
-  public String getString(int thePos) {
-    return get(thePos).stringValue();
-  }
+	public boolean getBoolean(int thePos) {
+		return get(thePos).booleanValue();
+	}
 
-
-  public byte[] getBlob(int thePos) {
-    return get(thePos).bytesValue();
-  }
-
-
-  public int[] getMidiBytes(int thePos) {
-    return get(thePos).midiValue();
-  }
-
-
-  public int[] getMidi(int thePos) {
-    return get(thePos).midiValue();
-  }
-
-
-  public boolean getBoolean(int thePos) {
-    return get(thePos).booleanValue();
-  }
-
-
-  /**
-   * this is only for christian's and jens' table communication with  vvvv.
-   * @return ArrayList
-   */
-  public ArrayList getDataList() {
-    ArrayList myList = new ArrayList();
-    Object[] myArguments = arguments();
-    for (int i = 0; i < myArguments.length; i++) {
-      myList.add(myArguments[i]);
-    }
-    return myList;
-  }
+	/**
+	 * this is only for christian's and jens' table communication with vvvv.
+	 * 
+	 * @return ArrayList
+	 */
+	public ArrayList getDataList() {
+		ArrayList myList = new ArrayList();
+		Object[] myArguments = arguments();
+		for (int i = 0; i < myArguments.length; i++) {
+			myList.add(myArguments[i]);
+		}
+		return myList;
+	}
 
 }
