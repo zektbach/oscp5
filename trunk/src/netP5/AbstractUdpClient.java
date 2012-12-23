@@ -164,7 +164,7 @@ public abstract class AbstractUdpClient {
       }
       catch (IOException e) {
         Logger.printError("UdpClient.send",
-                          "ioexception while sending packet.");
+                          "ioexception while sending packet. "+e);
       }
     }
   }
