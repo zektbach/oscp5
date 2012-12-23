@@ -18,9 +18,9 @@
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA  02111-1307  USA
  * 
- * @author		##author##
- * @modified	##date##
- * @version		##version##
+ * @author              ##author##
+ * @modified    ##date##
+ * @version             ##version##
  */
 
 package oscP5;
@@ -86,6 +86,8 @@ protected static final byte ZEROBYTE = 0x00;
                                     timetag,
                                     theClient));
         myPosition += myMessageLength;
+        if(myPosition >= theBytes.length)
+            break;
         myMessageLength = Bytes.toInt(Bytes.copy(theBytes, myPosition,4));
       }
     }
